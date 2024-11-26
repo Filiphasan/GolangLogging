@@ -1,0 +1,50 @@
+version: '3.9'
+
+volumes:
+  go-logging:
+    driver: local
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+    container_name: elasticsearch
+    restart: always
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - go-logging:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=true
+      - xpack.security.http.ssl.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+      - ELASTIC_USER=${ELASTIC_USER}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.10.2
+    container_name: kibana
+    restart: always
+    ports:
+      - "5601:5601"
+    volumes:
+      - go-logging:/usr/share/kibana/data
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTIC_USER=${ELASTIC_USER}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+    depends_on:
+      - elasticsearch
+
+  go-logging:
+    image: go-logging:local
+    container_name: go-logging
+    restart: always
+    build:
+      context: .
+      dockerfile: /app/Dockerfile
+    volumes:
+      - go-logging:/go-logging
+    depends_on:
+      - elasticsearch
