@@ -9,6 +9,7 @@ Complete Golang Logging Example on Console, File and Elasticsearch
 ├─ config
 │  ├─ elastic.go
 │  └─ logger.go
+│  └─ logger_es_writer.go
 ├─ .env
 ├─ .gitignore
 ├─ docker-compose.yml
