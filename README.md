@@ -1,6 +1,14 @@
-# GolangLogging
+# Project
 Golang Logging Example on Elasticsearch
 
+
+## Dependencies
+- [go-elasticsearch](https://pkg.go.dev/github.com/elastic/go-elasticsearch/v8)
+- [godotenv](https://pkg.go.dev/github.com/joho/godotenv)
+- [zap](https://pkg.go.dev/go.uber.org/zap)
+
+
+## Project Structure
 ```
 📦 
 ├─ app
