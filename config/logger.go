@@ -27,7 +27,7 @@ type ECSLogEntry struct {
 	Fields      map[string]interface{} `json:"fields"`
 }
 
-var notCheckedList []string = []string{"level", "msg"}
+var notCheckedList = []string{"level", "msg"}
 
 // Write converts zap logs to ECS format and sends them to Elasticsearch
 func (syncer *ECSSyncWriteSyncer) Write(p []byte) (n int, err error) {

@@ -36,14 +36,14 @@ services:
     depends_on:
       - elasticsearch
 
-#  go-logging:
-#    image: go-logging:local
-#    container_name: go-logging
-#    restart: always
-#    build:
-#      context: .
-#      dockerfile: /app/Dockerfile
-#    volumes:
-#      - go-logging:/go-logging
-#    depends_on:
-#      - elasticsearch
+  go-logging:
+    image: go-logging:local
+    container_name: go-logging
+    restart: always
+    build:
+      context: .
+      dockerfile: /app/Dockerfile
+    volumes:
+      - go-logging:/go-logging
+    depends_on:
+      - elasticsearch
